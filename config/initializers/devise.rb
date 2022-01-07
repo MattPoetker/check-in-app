@@ -1,17 +1,4 @@
 # frozen_string_literal: true
-class TurboFailureApp < Devise::FailureApp
-  def respond
-    if request_format == :turbo_stream
-      redirect
-    else
-      super
-    end
-  end
-
-  def skip_format?
-    %w(html turbo_stream */*).include? request_format.to_s
-  end
-end
 
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
@@ -22,12 +9,12 @@ end
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  config.navigational_formats = ['/', :html, :turbo_stream]  # The secret key used by Devise. Devise uses this key to generate
+  # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  config.secret_key = Rails.application.credentials.secret_key_base
+  # config.secret_key = '7a5e62ecbf1e5f54af0584f4f6b81448aa6db4c0cd6f2814b6cb86cf87d2cd028fba4907eb1a0e52d8cb29f05af552949f3fa883b899442e62619290d47bad40'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -139,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '0c5acb3598545dccf00460ddcc95145885f1603dc58d6c3036b54fef7306545414eb0195e2165bca563ce0ff29f1df283b898fe7b6cf9b5c5e02084df57b1e45'
+  # config.pepper = 'd8367c5d6d8a0caf451b5b731981e30713550f3517fb8cd8ab6c1d485aad3c904648676dcc016e4bf41f8db0a48794f867704e39723cd1770f2aaa9bd1ed0045'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -286,17 +273,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  env_creds = Rails.application.credentials[Rails.env.to_sym] || {}
-  %i{ facebook twitter github }.each do |provider|
-    if options = env_creds[provider]
-      config.omniauth provider, options[:app_id], options[:app_secret], options.fetch(:options, {})
-    end
-  end
-
   # ==> Warden configuration
-  config.warden do |manager|
-    manager.failure_app = TurboFailureApp
-  end
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
