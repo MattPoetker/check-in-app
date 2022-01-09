@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_07_014319) do
+ActiveRecord::Schema.define(version: 2022_01_09_015623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,20 @@ ActiveRecord::Schema.define(version: 2022_01_07_014319) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.datetime "start_date", precision: 6
+    t.datetime "end_date", precision: 6
+    t.string "location_address"
+    t.jsonb "itinerary", default: {}
+    t.integer "capacity"
+    t.string "capacity_unit", default: "guest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -107,5 +121,6 @@ ActiveRecord::Schema.define(version: 2022_01_07_014319) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "users"
   add_foreign_key "services", "users"
 end

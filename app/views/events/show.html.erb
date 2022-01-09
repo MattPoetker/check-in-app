@@ -1,0 +1,28 @@
+<div class="page-header">
+  <%= link_to events_path, class: 'btn btn-default' do %>
+    All Events
+  <% end %>
+  <%= link_to edit_event_path(@event), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show event</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>User:</dt>
+  <dd><%= @event.user %></dd>
+  <dt>Name:</dt>
+  <dd><%= @event.name %></dd>
+  <dt>Start date:</dt>
+  <dd><%= @event.start_date %></dd>
+  <dt>End date:</dt>
+  <dd><%= @event.end_date %></dd>
+  <dt>Location address:</dt>
+  <dd><%= @event.location_address %></dd>
+  <dt>Itinerary:</dt>
+  <dd><%= @event.itinerary %></dd>
+  <dt>Capacity:</dt>
+  <dd><%= @event.capacity %></dd>
+  <dt>Capacity unit:</dt>
+  <dd><%= @event.capacity_unit %></dd>
+</dl>
