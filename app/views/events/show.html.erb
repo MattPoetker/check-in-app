@@ -1,28 +1,140 @@
-<div class="page-header">
-  <%= link_to events_path, class: 'btn btn-default' do %>
-    All Events
-  <% end %>
-  <%= link_to edit_event_path(@event), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show event</h1>
-</div>
+<div class="bg-white">
+  <div class="pt-6 pb-16 sm:pb-24">
+     <nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ol role="list" class="flex items-center space-x-4">
+          <li>
+            <div class="flex items-center">
+              <%= link_to events_path, class: 'mr-4 text-sm font-medium text-gray-900 flex items-center' do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                See All Events
+              <% end %>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    <div class="mt-6 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
+        <div class="lg:col-start-8 lg:col-span-5">
+          <div class="flex justify-between">
+            <h1 class="text-xl font-medium text-gray-900">
+              <%= @event.name %>
+            </h1>
+            <p class="text-xl font-medium text-gray-900">
 
-<dl class="dl-horizontal">
-  <dt>User:</dt>
-  <dd><%= @event.user %></dd>
-  <dt>Name:</dt>
-  <dd><%= @event.name %></dd>
-  <dt>Start date:</dt>
-  <dd><%= @event.start_date %></dd>
-  <dt>End date:</dt>
-  <dd><%= @event.end_date %></dd>
-  <dt>Location address:</dt>
-  <dd><%= @event.location_address %></dd>
-  <dt>Itinerary:</dt>
-  <dd><%= @event.itinerary %></dd>
-  <dt>Capacity:</dt>
-  <dd><%= @event.capacity %></dd>
-  <dt>Capacity unit:</dt>
-  <dd><%= @event.capacity_unit %></dd>
-</dl>
+              <%= @event.start_date.strftime("%b %d, %I:%M%p") %>
+            </p>
+          </div>
+          <p class="text-sm mt-2 prose prose-sm text-gray-500">Hosted by: <%= @event.user.name %></p>
+        </div>
+
+        <!-- Image gallery -->
+        <div class="mt-8 lg:mt-0 lg:col-start-1 lg:col-span-7 lg:row-start-1 lg:row-span-3">
+          <h2 class="sr-only">Images</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
+            <img style="width: 100%;" src="https://images.pexels.com/photos/3371094/pexels-photo-3371094.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Back of women&#039;s Basic Tee in black." class="lg:col-span-2 lg:row-span-2 rounded-lg">
+
+            <img src="https://images.pexels.com/photos/226737/pexels-photo-226737.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Side profile of women&#039;s Basic Tee in black." class="hidden lg:block rounded-lg">
+
+            <img src="https://images.pexels.com/photos/776945/pexels-photo-776945.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Front of women&#039;s Basic Tee in black." class="hidden lg:block rounded-lg">
+          </div>
+        </div>
+
+        <div class="mt-8 lg:col-span-5">
+          <!-- Product details -->
+          <div class="mt-5">
+
+
+            <h2 class="text-sm font-medium text-gray-900">Description</h2>
+
+            <div class="mt-4 prose prose-sm text-gray-500">
+              <p>Want to join this event? You should attend, it will be fun.</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio voluptates recusandae commodi iure adipisci nesciunt molestias quidem officia. Ipsam, doloribus obcaecati incidunt iusto voluptatum eaque quam vitae eos debitis placeat?</p>
+            </div>
+
+            <div class="mt-5 mb-5 ">
+              <h2 class="text-sm font-medium text-gray-900">Venue:</h2>
+              <div class="mt-4 prose prose-sm text-gray-500">
+                <p><%= @event.location_address %></p>
+              </div>
+            </div>
+            <div class="mt-5 mb-5">
+              <h2 class="text-sm font-medium tet-gray-900">Ends at:</h2>
+              <div class="mt-4 prose prose-sm text-gray-500">
+                <p><%= @event.end_date.strftime("%b %d, %I:%M%p") %></p>
+              </div>
+            </div>
+            <form>
+              <button type="submit" class="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
+            </form>
+            
+            <%= link_to edit_event_path(@event), class: 'mt-2 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"' do %>
+              Edit Event
+            <% end %>
+            
+
+          </div>
+
+          <div class="mt-8 border-t border-gray-200 pt-8">
+            <h2 class="text-sm font-medium text-gray-900">About this event:</h2>
+
+            <div class="mt-4 prose prose-sm text-gray-500">
+              <ul role="list">
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. </li>
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. </li>
+                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. </li>
+              </ul>
+            </div>
+
+            <h2 class="mt-4 text-sm font-medium text-gray-900">Itinerary:</h2>
+          
+            <ul>
+              <li><%= @event.itinerary %></li>
+            </ul>
+          </div>
+
+          <!-- Policies -->
+          <section aria-labelledby="policies-heading" class="mt-10">
+            <h2 id="policies-heading" class="sr-only">Our Policies</h2>
+
+            <dl class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                <dt>
+                  <!-- Heroicon name: outline/globe -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-6 w-6 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                  </svg>
+                  <span class="mt-4 text-sm font-medium text-gray-900">
+                    Scan Your QR Code
+                  </span>
+                </dt>
+                <dd class="mt-1 text-sm text-gray-500">
+                  Use your phone to Check-in at the door
+                </dd>
+              </div>
+
+              <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                <dt>
+                  <!-- Heroicon name: outline/currency-dollar -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-6 w-6 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <span class="mt-4 text-sm font-medium text-gray-900">
+                    Capacity
+                  </span>
+                </dt>
+                <dd class="mt-1 text-sm text-gray-500">
+                  We have room for <%= @event.capacity %> <%= @event.capacity_unit %>s<br>
+                  
+                  Reserve your spot today!
+                </dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
